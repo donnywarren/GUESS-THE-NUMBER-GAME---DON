@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log(`outside  ${randomNumber}`);
 
 
-
   document.getElementById("guess").addEventListener("submit", function(event){
     event.preventDefault();
     var userInput = document.getElementById("input").value;
@@ -26,43 +25,29 @@ document.addEventListener('DOMContentLoaded', function() {
       if(isNaN(number)){
         console.log("You must enter a number.");
       } else if(number < 1 || number > 10){
-        console.log("You must guess a number between 1 and 10.");
+        var newLi = document.createElement("li");
+        newLi.innerHTML = "You must guess a number betweeen 1 and 10.";
+        document.getElementById("hints").appendChild(newLi);
       } else if(number > randomNumber){
-        console.log(`The number you seek is less than ${number}`);
+        var newLi = document.createElement("li");
+        newLi.innerHTML = `The number you seek is less than ${number}.`;
+        document.getElementById("hints").appendChild(newLi);
       } else if(number < randomNumber){
-        console.log(`The number you seek is greater than ${number}`);
+        var newLi = document.createElement("li");
+        newLi.innerHTML = `The number you seek is greater than ${number}.`;
+        document.getElementById("hints").appendChild(newLi);
       } else if(number === randomNumber){
-        console.log(`You win! ${number} is the right nubmer!`)
+        var newLi = document.createElement("li");
+        newLi.innerHTML = `YOU WIN!!!<br/>${number} is the right number!`;
+        newLi.className = "win";
+        document.getElementById("hints").appendChild(newLi);
       }
     }
 
     checkStatus(number);
 
-});
+    var count = document.getElementById("hints").childElementCount;
+    document.getElementById("number-of-guesses").innerHTML = count;
 
-
-
-
-
-
-  //
-  // document.querySelector("input").addEventListener("submit", function(event){
-  //   event.preventDefault();
-  //   var guess = document.querySelector("input").value;
-  //   console.log(`${guess} is the input guess.`);
-  //   checkStatus(guess);
-  // });
-  //
-  //
-  // console.log(`Random number ${randomNumber}`);
-  //
-  // checkStatus(guessNumber);
-
-
-
-
-
-
-
-
+  });
 });

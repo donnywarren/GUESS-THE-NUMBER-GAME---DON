@@ -13,11 +13,20 @@
     <p>Try to guess a number between 1 and 10.</p>
 
     <form  id="guess">
-      <input type="text" name="player-guess" value="" placeholder="Guess a number" id="input">
-
+      <input type="text" name="player-guess" value="" placeholder="Guess a number" autocomplete="off" id="input">
     </form>
 
+    <div>
+      <p>Number of guesses:
+        <span id="number-of-guesses"></span>
+      </p>
+
     </div>
+
+    <ul id="hints">
+
+    </ul>
+
 
   </body>
 </html>
