@@ -3,13 +3,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var maxNumber = 10;
   var randomNumber;
-  var number;
 
   function randomNumbers(){
     randomNumber = Math.ceil(Math.random()*maxNumber);
   }
     randomNumbers();
-    console.log(`outside  ${randomNumber}`);
+    console.log(`MAGIC NUMBER = ${randomNumber}`);
 
 
   document.getElementById("guess").addEventListener("submit", function(event){
@@ -19,31 +18,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.getElementById("input").value="";
 
-    console.log(`This is the parsed numb ${number}`);
-
     function checkStatus(number) {
       if(isNaN(number)){
-        console.log("You must enter a number.");
+        message = "You must enter a number.";
       } else if(number < 1 || number > 10){
-        var newLi = document.createElement("li");
-        newLi.innerHTML = "You must guess a number betweeen 1 and 10.";
-        document.getElementById("hints").appendChild(newLi);
+        message = "You must guess a number betweeen 1 and 10.";
       } else if(number > randomNumber){
-        var newLi = document.createElement("li");
-        newLi.innerHTML = `The number you seek is less than ${number}.`;
-        document.getElementById("hints").appendChild(newLi);
+        message = `The number you seek is less than ${number}.`;
       } else if(number < randomNumber){
-        var newLi = document.createElement("li");
-        newLi.innerHTML = `The number you seek is greater than ${number}.`;
-        document.getElementById("hints").appendChild(newLi);
+        message = `The number you seek is greater than ${number}.`;
       } else if(number === randomNumber){
+        var winLi = document.createElement("li");
+        winLi.className = "win";
+        winLi.innerHTML = `YOU WIN!!!<br/>${number} is the right number!`;
+        document.getElementById("hints").appendChild(winLi);
+        return;
+      }
+
+      function hintContent() {
         var newLi = document.createElement("li");
-        newLi.innerHTML = `YOU WIN!!!<br/>${number} is the right number!`;
-        newLi.className = "win";
+        newLi.innerHTML = message;
         document.getElementById("hints").appendChild(newLi);
       }
+      hintContent();
     }
-
     checkStatus(number);
 
     var count = document.getElementById("hints").childElementCount;
